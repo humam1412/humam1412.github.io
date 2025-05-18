@@ -1,98 +1,704 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Humam</title>
-    <link href=’https://fonts.googleapis.com/css?family=Didact Gothic’ rel=’stylesheet’> 
-    <link href="style.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Humam Annafis | Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-      h2, h3 { font-family: ‘Didact Gothic’;font-size: 22px; }
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --accent-color: #f59e0b;
+            --nav-height: 70px;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            overflow-x: hidden;
+            padding-bottom: var(--nav-height);
+        }
+        
+        /* Minimalist Background Patterns */
+        .bg-pattern-1 {
+            background-color: #ffffff;
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .bg-pattern-2 {
+            background-color: #ffffff;
+            background-image: linear-gradient(#f3f4f6 1px, transparent 1px),
+                              linear-gradient(90deg, #f3f4f6 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .bg-pattern-3 {
+            background-color: #ffffff;
+            background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        /* Universal Bottom Navigation */
+        .universal-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            padding: 10px 0;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark-color);
+            padding: 8px 12px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+            width: 70px;
+        }
+        
+        .nav-item.active {
+            color: var(--primary-color);
+            transform: translateY(-10px);
+            background: rgba(37, 99, 235, 0.1);
+        }
+        
+        .nav-item .nav-icon {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item.active .nav-icon {
+            transform: scale(1.15);
+        }
+        
+        .nav-item .nav-text {
+            font-size: 0.7rem;
+            font-weight: 500;
+            opacity: 0;
+            height: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item.active .nav-text {
+            opacity: 1;
+            height: auto;
+        }
+        
+        /* Content Sections */
+        section {
+            padding: 80px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .title {
+            font-weight: 800;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--dark-color);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-custom:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.15);
+        }
+        
+        .section-title {
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: -10px;
+            left: 0;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            overflow: hidden;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+        
+        .card-header {
+            background-color: white;
+            border-bottom: none;
+            padding: 20px;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            border: 2px solid white;
+        }
+        
+        .timeline-date {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-description {
+            color: #64748b;
+            line-height: 1.6;
+        }
+        
+        .skill-item {
+            margin-bottom: 20px;
+        }
+        
+        .skill-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .progress {
+            height: 6px;
+            border-radius: 3px;
+            background-color: #e2e8f0;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 3px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-right: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        .animate-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .nav-bounce {
+            animation: bounce 0.5s ease;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+            
+            .profile-img {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.2rem;
+            }
+            
+            .nav-item {
+                width: 60px;
+                padding: 6px 8px;
+            }
+            
+            .nav-item .nav-icon {
+                font-size: 1.2rem;
+            }
+        }
     </style>
-  </head>
-  <body>
-
-    <div class="scroll-downs" style="margin-top: 1cm;">
-      <div class="mousey">
-        <div class="scroller"></div>
-      </div>
-    </div>
-</div>
-      <div class="external">
-        <div class="horizontal-scroll-wrapper" style="margin-left: 10vw;">
-          <div class="img-wrapper faster" style="margin-left: 10vw;">
-           <h2 style="margin-left: 2vw; color: #A7D129;">------- Hi, I'm <br> ------- Humam  annafis</h2>
-          </div>
-
-          <div class="img-wrapper faster" style="margin-left: 10vw;">
-          <h3 style=" color:#616F39;"> Clik To Access <br> my Resume>>></h3><br>
-              <a href="https://drive.google.com/file/d/1uvoSv9NZbYCfWlUU5bdTg-_Wtf04KaxY/view?usp=sharing"><img src="doc/poto.jpg" alt=""></a>
-           </div>
-          
-          <div class="img-wrapper slower" style="margin-left: 3cm;">
-            <h2 style="margin-left: 2vw; color:#616F39;">Hello World!! <br>I'm undergraduate student majoring <br> Business with broad curiosity and <br> im currently looking for opportunities <br> in digital industry,  <br><br> I have over two years of experience  <br> working and learning as a web programmer. <br> my specialty include HTML,<br> CSS, JavaScript, C#, ASP.NET <br> MSSQL, PHP, Laravel and React Js</h2>
-          </div>
-          <div class="img-wrapper faster" style="margin-left: 10vw;">
-         
-              <h3 style=" color:#616F39;"> My Expertise >>></h3><br>
-              <img src="doc/skill.jpg">
-           </div>
-           <div class="img-wrapper faster" style="margin-left: 10vw;">
-            <h2 style="margin-left: 2vw; color: #A7D129;">My Project  >>></h2>
-           </div>
-
-           <div class="img-wrapper faster" style="margin-left: 10vw;">
-           <a href="https://destinesia.id/">
-              <img src="doc/DESTINESIA PUTIH NO BG.png" id="klik" style="border-radius:50%;"  >
-            </a>
-         
-           </div>
-           <div class="img-wrapper faster" style="margin-left: 10vw;">
-            <a href="https://ibisbandungtransstudio.com/">
-               <img src="doc/Logo Master-03.png" id="klik" style="border-radius:0%;"  >
-             </a>
-          
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+    <!-- Universal Bottom Navigation -->
+    <nav class="universal-navbar">
+        <div class="container">
+            <div class="nav-container">
+                <a href="#home" class="nav-item active" data-section="home">
+                    <i class="fas fa-home nav-icon"></i>
+                    <span class="nav-text">Home</span>
+                </a>
+                <a href="#about" class="nav-item" data-section="about">
+                    <i class="fas fa-user nav-icon"></i>
+                    <span class="nav-text">About</span>
+                </a>
+                <a href="#experience" class="nav-item" data-section="experience">
+                    <i class="fas fa-briefcase nav-icon"></i>
+                    <span class="nav-text">Experience</span>
+                </a>
+                <a href="#education" class="nav-item" data-section="education">
+                    <i class="fas fa-graduation-cap nav-icon"></i>
+                    <span class="nav-text">Education</span>
+                </a>
+                <a href="#contact" class="nav-item" data-section="contact">
+                    <i class="fas fa-envelope nav-icon"></i>
+                    <span class="nav-text">Contact</span>
+                </a>
             </div>
-
-            <div class="img-wrapper slower"  >
-              <div style="width: 3cm; height: 1.5cm;"></div> 
-              <h2 style="color: white;">Connect With Me >>> </h2>
-              <div style="width: 0.5cm; height: 1.5cm;"></div> 
-              <a href="https://wa.me/621210230311/?text=hello">
-              <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" id="wa" class="bi bi-whatsapp" viewBox="0 0 16 16" style="color:azure; ">
-                <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-              </svg>
-            </a >
-              <div style="width: 1.5cm; height: 1.5cm;"></div> 
-           <a href="https://instagram.com/__mhumam?igshid=YmMyMTA2M2Y=">
-<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-instagram" id="ig" viewBox="0 0 16 16" style="color:azure; " >
-  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-</svg>
-</a>
-
-<a href="https://www.linkedin.com/in/humam-muhammad-38b865221" class="satuu" style="margin-left: 1.5cm; ">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="70px" height="70px"><g fill="#ededed" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M9,4c-2.74952,0 -5,2.25048 -5,5v32c0,2.74952 2.25048,5 5,5h32c2.74952,0 5,-2.25048 5,-5v-32c0,-2.74952 -2.25048,-5 -5,-5zM9,6h32c1.66848,0 3,1.33152 3,3v32c0,1.66848 -1.33152,3 -3,3h-32c-1.66848,0 -3,-1.33152 -3,-3v-32c0,-1.66848 1.33152,-3 3,-3zM14,11.01172c-1.09522,0 -2.08078,0.32736 -2.81055,0.94141c-0.72977,0.61405 -1.17773,1.53139 -1.17773,2.51367c0,1.86718 1.61957,3.32281 3.67969,3.4668c0.0013,0.00065 0.0026,0.0013 0.00391,0.00195c0.09817,0.03346 0.20099,0.05126 0.30469,0.05273c2.27301,0 3.98828,-1.5922 3.98828,-3.52148c-0.00018,-0.01759 -0.00083,-0.03518 -0.00195,-0.05274c-0.10175,-1.90023 -1.79589,-3.40234 -3.98633,-3.40234zM14,12.98828c1.39223,0 1.94197,0.62176 2.00195,1.50391c-0.01215,0.85625 -0.54186,1.51953 -2.00195,1.51953c-1.38541,0 -2.01172,-0.70949 -2.01172,-1.54492c0,-0.41771 0.15242,-0.7325 0.47266,-1.00195c0.32023,-0.26945 0.83428,-0.47656 1.53906,-0.47656zM11,19c-0.55226,0.00006 -0.99994,0.44774 -1,1v19c0.00006,0.55226 0.44774,0.99994 1,1h6c0.55226,-0.00006 0.99994,-0.44774 1,-1v-5.86523v-13.13477c-0.00006,-0.55226 -0.44774,-0.99994 -1,-1zM20,19c-0.55226,0.00006 -0.99994,0.44774 -1,1v19c0.00006,0.55226 0.44774,0.99994 1,1h6c0.55226,-0.00006 0.99994,-0.44774 1,-1v-10c0,-0.82967 0.22639,-1.65497 0.625,-2.19531c0.39861,-0.54035 0.90147,-0.86463 1.85742,-0.84766c0.98574,0.01695 1.50758,0.35464 1.90234,0.88477c0.39477,0.53013 0.61523,1.32487 0.61523,2.1582v10c0.00006,0.55226 0.44774,0.99994 1,1h6c0.55226,-0.00006 0.99994,-0.44774 1,-1v-10.73828c0,-2.96154 -0.87721,-5.30739 -2.38086,-6.89453c-1.50365,-1.58714 -3.59497,-2.36719 -5.80664,-2.36719c-2.10202,0 -3.70165,0.70489 -4.8125,1.42383v-0.42383c-0.00006,-0.55226 -0.44774,-0.99994 -1,-1zM12,21h4v12.13477v4.86523h-4zM21,21h4v1.56055c0.00013,0.43 0.27511,0.81179 0.68291,0.94817c0.40781,0.13638 0.85714,-0.00319 1.11591,-0.34661c0,0 1.57037,-2.16211 5.01367,-2.16211c1.75333,0 3.25687,0.58258 4.35547,1.74219c1.0986,1.15961 1.83203,2.94607 1.83203,5.51953v9.73828h-4v-9c0,-1.16667 -0.27953,-2.37289 -1.00977,-3.35352c-0.73023,-0.98062 -1.9584,-1.66341 -3.47266,-1.68945c-1.52204,-0.02703 -2.77006,0.66996 -3.50195,1.66211c-0.73189,0.99215 -1.01562,2.21053 -1.01562,3.38086v9h-4z"></path></g></g></svg>
-</a>
-<div style="width: 4cm; height: 4cm;"></div> 
-</div>
-           
-           
-             
-          
-          
-         
         </div>
-       
-      </div>
-      
-      
-    
+    </nav>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section bg-pattern-1">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-1 order-2 animate-fade-in">
+                    <h1 class="title">Hi, I'm <br>Muhammad Humam Annafis</h1>
+                    <p class="subtitle">Web Developer | Digital Marketer | Creative Content Creator</p>
+                    <a href="#about" class="btn btn-primary btn-primary-custom">Explore More</a>
+                </div>
+                <div class="col-lg-6 order-lg-2 order-1 text-center mb-5 mb-lg-0">
+                    <img src="doc/humam2.png" alt="Profile Image" class="profile-img animate-float">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-pattern-2">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <p class="lead">I'm a passionate web developer and digital marketer with expertise in creating engaging digital experiences.</p>
+                    <p>With a background in business and hands-on experience in marketing communications and web development, I bring a unique combination of technical skills and creative vision to every project.</p>
+                    <p>My journey has taken me from creating social media content to developing full-fledged web applications, allowing me to understand digital projects from multiple perspectives.</p>
+                    <div class="mt-4">
+                        <a href="#contact" class="btn btn-primary btn-primary-custom me-3">Contact Me</a>
+                        <a href="#experience" class="btn btn-outline-primary">My Experience</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <i class="fas fa-code me-2"></i> Development
+                                </div>
+                                <div class="card-body">
+                                    <p>Full-stack web development with focus on creating responsive, user-friendly applications.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <i class="fas fa-camera me-2"></i> Content Creation
+                                </div>
+                                <div class="card-body">
+                                    <p>Professional photography, videography, and social media content creation.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-line me-2"></i> Digital Marketing
+                                </div>
+                                <div class="card-body">
+                                    <p>Strategic social media management and digital marketing campaigns.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <i class="fas fa-lightbulb me-2"></i> Entrepreneurship
+                                </div>
+                                <div class="card-body">
+                                    <p>Founder and CEO of Destinesia.id, bringing innovative ideas to life.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="bg-pattern-3">
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item animate-fade-in">
+                    <div class="timeline-date">2023 - Present</div>
+                    <h3 class="timeline-title">Web Developer</h3>
+                    <p class="timeline-description">Developed and maintained websites including:</p>
+                    <ul>
+                        <li><a href="https://ibisbandungtransstudio.com/" target="_blank">ibisbandungtransstudio.com</a></li>
+                        <li><a href="https://i-modis.com/login" target="_blank">i-modis.com</a></li>
+                        <li><a href="https://lokafitnessbandung.com/" target="_blank">lokafitnessbandung.com</a></li>
+                    </ul>
+                </div>
+                <div class="timeline-item animate-fade-in">
+                    <div class="timeline-date">2022 - 2023</div>
+                    <h3 class="timeline-title">Marcomm Specialist - Ibis Bandung Trans Studio</h3>
+                    <p class="timeline-description">Created 98+ social media content pieces, handling everything from shooting to editing.</p>
+                </div>
+                <div class="timeline-item animate-fade-in">
+                    <div class="timeline-date">2021 - Present</div>
+                    <h3 class="timeline-title">CEO & Founder - Destinesia.id</h3>
+                    <p class="timeline-description"><a href="https://destinesia.id/" target="_blank">destinesia.id</a> - Building and managing my own business venture.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="bg-pattern-1">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card animate-fade-in">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                    <i class="fas fa-graduation-cap fa-2x"></i>
+                                </div>
+                                <div class="ms-4">
+                                    <h4 class="mb-0">Binus University</h4>
+                                    <p class="text-muted mb-0">Bachelor's Degree in Business</p>
+                                </div>
+                            </div>
+                            <p>Comprehensive business education with focus on digital transformation and entrepreneurship. Developed strong foundation in business strategy, marketing, and management principles.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">2018 - 2022</span>
+                                <span class="badge bg-success">Graduated</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="bg-pattern-2">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h3 class="mb-4"><i class="fas fa-laptop-code me-2"></i> Technical Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">HTML, CSS, JS & Bootstrap</div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">C#, ASP.NET & Microsoft SQL Server</div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">PHP, Laravel & MySQL</div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="mb-4"><i class="fas fa-camera-retro me-2"></i> Creative Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">Photography & Videography</div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Adobe Photoshop & Premiere Pro</div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Canva & Capcut</div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-pattern-3">
+        <div class="container">
+            <h2 class="section-title">Connect With Me</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <p class="lead mb-5">Feel free to reach out for collaborations or just a friendly hello!</p>
+                    <div class="d-flex justify-content-center mb-5">
+                        <a href="https://wa.me/yournumber" class="social-icon" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://instagram.com/yourusername" class="social-icon" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/yourusername" class="social-icon" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                    <p class="text-muted">Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="mb-0">© 2023 Muhammad Humam Annafis. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
     <script>
-     
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav link
+                updateActiveNav(this.getAttribute('href'));
+                
+                // Add bounce animation to nav item
+                this.classList.add('nav-bounce');
+                setTimeout(() => {
+                    this.classList.remove('nav-bounce');
+                }, 500);
+            });
+        });
+        
+        // Function to update active nav link
+        function updateActiveNav(sectionId) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === sectionId) {
+                    item.classList.add('active');
+                }
+            });
+        }
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-fade-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Initialize animations
+        window.addEventListener('load', () => {
+            animateOnScroll();
+        });
+        
+        window.addEventListener('scroll', () => {
+            animateOnScroll();
+        });
+        
+        // Update active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = `#${section.getAttribute('id')}`;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    updateActiveNav(sectionId);
+                }
+            });
+        });
+        
+        // Navbar click animation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.add('nav-bounce');
+                setTimeout(() => {
+                    this.classList.remove('nav-bounce');
+                }, 500);
+            });
+        });
     </script>
-  </body>
+</body>
 </html>
