@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Experience | Muhammad Humam Annafis</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #262626;
+            --secondary-color: #8e8e8e;
+            --hover-color: #f5f5f5;
+        }
+
+        body {
+            background-color: #fafafa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding-bottom: 50px;
+            overflow-x: hidden;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            max-width: 935px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .profile-cover {
+            width: 100%;
+            height: 200px;
+            background: #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background-image: url('https://res.cloudinary.com/dhuhfc1tq/image/upload/v1750406863/Screenshot_2025-06-20_150720_p7ektn.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-right: 30px;
+            border: 3px solid white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            max-width: 935px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gallery-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 30px 0 20px;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            background: #000;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .item-overlay {
+            opacity: 1;
+        }
+
+        .video-icon {
+            font-size: 2rem;
+            margin-right: 8px;
+        }
+
+        .item-stats {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .item-stats i {
+            margin-right: 3px;
+        }
+
+        /* Modal Styles */
+        .media-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+        }
+
+        .modal-content img {
+            max-width: 90vw;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .video-container {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+
+        .video-container iframe, 
+        .video-container video {
+            width: auto;
+            height: auto;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Portrait video specific */
+        .video-portrait {
+            max-height: 80vh;
+            max-width: calc(80vh * 9/16); /* Adjust aspect ratio as needed */
+        }
+
+        /* Landscape video specific */
+        .video-landscape {
+            max-width: 80vw;
+            max-height: calc(80vw * 9/16);
+        }
+
+        .modal-content video {
+            max-width: 100%;
+            max-height: 90vh;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+                /* Universal Bottom Navigation */
+                .universal-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            padding: 10px 0;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark-color);
+            padding: 8px 12px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+            width: 70px;
+        }
+        
+        .nav-item.active {
+            color: var(--primary-color);
+            transform: translateY(-10px);
+            background: rgba(37, 99, 235, 0.1);
+        }
+        
+        .nav-item .nav-icon {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item.active .nav-icon {
+            transform: scale(1.15);
+        }
+        
+        .nav-item .nav-text {
+            font-size: 0.7rem;
+            font-weight: 500;
+            opacity: 0;
+            height: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item.active .nav-text {
+            opacity: 1;
+            height: auto;
+        }
+        
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .profile-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-pic {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .profile-stats {
+                justify-content: center;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                gap: 1px;
+            }
+            
+            .item-stats {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+        <!-- Universal Bottom Navigation -->
+        <nav class="universal-navbar">
+            <div class="container">
+                <div class="nav-container">
+                    <a href="humam3.html#home" class="nav-item" data-section="home">
+                        <i class="fas fa-home nav-icon"></i>
+                        <span class="nav-text">Home</span>
+                    </a>
+                    <a href="humam3.html#about" class="nav-item" data-section="about">
+                        <i class="fas fa-user nav-icon"></i>
+                        <span class="nav-text">About</span>
+                    </a>
+                    <a href="#experience" class="nav-item active" data-section="experience">
+                        <i class="fas fa-briefcase nav-icon"></i>
+                        <span class="nav-text">Experience</span>
+                    </a>
+                    <a href="humam3.html#education" class="nav-item" data-section="education">
+                        <i class="fas fa-graduation-cap nav-icon"></i>
+                        <span class="nav-text">Education</span>
+                    </a>
+                    <a href="humam3.html#contact" class="nav-item" data-section="contact">
+                        <i class="fas fa-envelope nav-icon"></i>
+                        <span class="nav-text">Contact</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    <!-- Profile Header -->
+    <header class="profile-header">
+        <div class="profile-cover"></div>
+        <div class="profile-info">
+            <img src="https://res.cloudinary.com/dhuhfc1tq/image/upload/v1750406509/logo_ibis_ovtwvj.jpg" class="profile-pic" alt="Company Logo">
+            <div>
+                <h2>ibis Bandung Trans Studio</h2>
+                <p class="text-muted">Hospitality & Tourism</p>
+                <div class="profile-stats">
+                    <div>
+                        <span class="stat-number">98+</span> posts
+                    </div>
+                    <div>
+                        <span class="stat-number">110+</span> edited content
+                    </div>
+                    <div>
+                        <span class="stat-number">2m +</span> interaction
+                    </div>
+                </div>
+                <p class="mb-0">Official account content created by Muhammad Humam Annafis (2023-2024)</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <h2 class="gallery-title">Social Media Gallery</h2>
+        
+        <div class="gallery-grid">
+            <!-- Item 1 - Image -->
+            <div class="gallery-item" onclick="openMedia('video', 'https://res.cloudinary.com/dhuhfc1tq/video/upload/v1750405515/Wedding_24_feb_Novi_Raka_nr6hzy.mp4', 'landscape')">
+                <img src="https://res.cloudinary.com/dhuhfc1tq/image/upload/v1750405592/0620_7_vgg3ln.png" alt="Hotel Lobby">
+                <div class="item-overlay">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="item-stats">
+                    <span><i class="fas fa-heart"></i> 245</span>
+                    <span><i class="fas fa-comment"></i> 36</span>
+                </div>
+            </div>
+            
+            <!-- Item 2 - Video -->
+            <div class="gallery-item" onclick="openMedia('video', 'https://res.cloudinary.com/dhuhfc1tq/video/upload/v1750403375/wedding_magazine_1_tdktri.mp4', 'portrait')">
+                <img src="https://res.cloudinary.com/dhuhfc1tq/image/upload/v1750403861/0620_cezsxu.png" alt="Hotel Tour">
+                <div class="item-overlay">
+                    <i class="fas fa-play-circle video-icon"></i>
+                </div>
+                <div class="item-stats">
+                    <span><i class="fas fa-eye"></i> 15k</span>
+                </div>
+            </div>
+            
+            <!-- Item 3 - Image -->
+            <div class="gallery-item" onclick="openMedia('video', 'https://res.cloudinary.com/dhuhfc1tq/video/upload/v1750405191/Anggi_marito_bwb0la.mp4', 'portrait')">
+                <img src="https://res.cloudinary.com/dhuhfc1tq/image/upload/v1750405588/0620_1_ur3epc.png" alt="Restaurant Menu">
+                <div class="item-overlay">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="item-stats">
+                    <span><i class="fas fa-heart"></i> 189</span>
+                    <span><i class="fas fa-comment"></i> 28</span>
+                </div>
+            </div>
+            
+            <!-- Item 4 - Image -->
+            <div class="gallery-item" onclick="openMedia('video', 'https://res.cloudinary.com/dhuhfc1tq/video/upload/v1750405355/Gow_get_It_k1jyhg.mp4', 'portrait')">
+                <img src="https://res.cloudinary.com/dhuhfc1tq/image/upload/v1750405600/0620_2_kt3nfo.png" alt="Event Space">
+                <div class="item-overlay">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="item-stats">
+                    <span><i class="fas fa-heart"></i> 312</span>
+                    <span><i class="fas fa-comment"></i> 42</span>
+                </div>
+            </div>
+            
+            <!-- Item 5 - Video -->
+            <div class="gallery-item" onclick="openMedia('video', 'https://res.cloudinary.com/dhuhfc1tq/video/upload/v1750405250/valentine_2_ohro7l.mp4', 'portrait')">
+                <img src="https://res.cloudinary.com/dhuhfc1tq/image/upload/v1750405601/0620_3_ll8wqz.png" alt="Special Offer">
+                <div class="item-overlay">
+                    <i class="fas fa-play-circle video-icon"></i>
+                </div>
+                <div class="item-stats">
+                    <span><i class="fas fa-eye"></i> 22k</span>
+                </div>
+            </div>
+            
+            <!-- Item 6 - Image -->
+            <div class="gallery-item" onclick="openMedia('video', 'https://res.cloudinary.com/dhuhfc1tq/video/upload/v1750405507/kejar_kartu_mega_hryjbl.mp4', 'portrait')">
+                <img src="https://res.cloudinary.com/dhuhfc1tq/image/upload/v1750405596/0620_4_dmxmfu.png" alt="Room Interior">
+                <div class="item-overlay">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="item-stats">
+                    <span><i class="fas fa-heart"></i> 276</span>
+                    <span><i class="fas fa-comment"></i> 31</span>
+                </div>
+            </div>
+            
+            <!-- Item 7 - Image -->
+            <div class="gallery-item" onclick="openMedia('video', 'https://res.cloudinary.com/dhuhfc1tq/video/upload/v1750405761/table_manner_m29jzl.mp4', 'portrait')">
+                <img src="https://res.cloudinary.com/dhuhfc1tq/image/upload/v1750405597/0620_5_ukblmy.png" alt="Pool Area">
+                <div class="item-overlay">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="item-stats">
+                    <span><i class="fas fa-heart"></i> 198</span>
+                    <span><i class="fas fa-comment"></i> 25</span>
+                </div>
+            </div>
+            
+            <!-- Item 8 - Video -->
+            <div class="gallery-item" onclick="openMedia('video', 'https://res.cloudinary.com/dhuhfc1tq/video/upload/v1750405339/Konten_Hampers_Sapi_gcli1x.mp4', 'portrait')">
+                <img src="https://res.cloudinary.com/dhuhfc1tq/image/upload/v1750406134/Screenshot_2025-06-20_145517_w85zme.png" alt="Behind the Scenes">
+                <div class="item-overlay">
+                    <i class="fas fa-play-circle video-icon"></i>
+                </div>
+                <div class="item-stats">
+                    <span><i class="fas fa-eye"></i> 18k</span>
+                </div>
+            </div>
+            
+            <!-- Item 9 - Image -->
+            <div class="gallery-item" onclick="openMedia('video', 'https://res.cloudinary.com/dhuhfc1tq/video/upload/v1750405355/Gow_get_It_k1jyhg.mp4', 'portrait')">
+                <img src="https://res.cloudinary.com/dhuhfc1tq/image/upload/v1750405600/0620_2_kt3nfo.png" alt="Breakfast Buffet">
+                <div class="item-overlay">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="item-stats">
+                    <span><i class="fas fa-heart"></i> 224</span>
+                    <span><i class="fas fa-comment"></i> 19</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Modal -->
+    <div id="mediaModal" class="media-modal">
+        <span class="close-modal" onclick="closeMedia()">&times;</span>
+        <div class="modal-content" id="modalContent">
+            <!-- Content will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+            // Open media in modal
+            function openMedia(type, src, orientation = 'landscape') {
+            const modal = document.getElementById('mediaModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            // Clear previous content
+            modalContent.innerHTML = '';
+            
+            // Create appropriate media element
+            if (type === 'img') {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = 'Fullscreen image';
+                modalContent.appendChild(img);
+            } else if (type === 'video') {
+                const container = document.createElement('div');
+                container.className = 'video-container ' + 
+                    (orientation === 'portrait' ? 'video-portrait' : 'video-landscape');
+                
+                // For YouTube videos
+                if (src.includes('youtube.com') || src.includes('youtu.be')) {
+                    const video = document.createElement('iframe');
+                    video.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1';
+                    video.frameBorder = '0';
+                    video.allow = 'autoplay; fullscreen';
+                    video.allowFullscreen = true;
+                    container.appendChild(video);
+                } 
+                // For local videos
+                else {
+                    const video = document.createElement('video');
+                    video.src = src;
+                    video.controls = true;
+                    video.autoplay = true;
+                    container.appendChild(video);
+                }
+                
+                modalContent.appendChild(container);
+            }
+            
+            // Show modal
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        
+        // Close modal
+        function closeMedia() {
+            const modal = document.getElementById('mediaModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Stop any playing videos
+            const iframe = document.querySelector('#modalContent iframe');
+            if (iframe) {
+                iframe.src = '';
+            }
+        }
+        
+        // Close modal when clicking outside content
+        window.onclick = function(event) {
+            const modal = document.getElementById('mediaModal');
+            if (event.target == modal) {
+                closeMedia();
+            }
+        }
+        
+        // Close modal with ESC key
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            if (evt.key === 'Escape') {
+                closeMedia();
+            }
+        };
+
+            
+        // Navbar click animation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.add('nav-bounce');
+                setTimeout(() => {
+                    this.classList.remove('nav-bounce');
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
