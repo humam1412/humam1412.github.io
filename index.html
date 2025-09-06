@@ -307,6 +307,23 @@
             color: white;
             transform: translateY(-3px);
         }
+.profile-wrapper {
+    display: inline-block;
+}
+
+.hero-social-icons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.hero-social-icons .social-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+}
+
         
         /* Animations */
         .animate-fade-in {
@@ -411,10 +428,29 @@
                 <div class="col-lg-6 order-lg-2 order-1 text-center mb-5 mb-lg-0">
                     <img src="doc/humam2.png" alt="Profile Image" class="profile-img animate-float">
                 </div>
+                <div class="col-lg-6 order-lg-2 order-1 text-center mb-5 mb-lg-0">
+    <div class="profile-wrapper animate-float">
+        <img src="doc/humam2.png" alt="Profile Image" class="profile-img">
+        
+        <!-- Social Icons di bawah foto -->
+        <div class="hero-social-icons mt-3">
+            <a href="https://wa.me/6281210230311" class="social-icon" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://instagram.com/_mhumam" class="social-icon" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://linkedin.com/in/humam-muhammad-38b865221" class="social-icon" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
             </div>
         </div>
     </section>
-
+ 
     <!-- About Section -->
     <section id="about" class="bg-pattern-2">
         <div class="container">
@@ -707,4 +743,5 @@
     </script>
 </body>
 </html>
+
 
